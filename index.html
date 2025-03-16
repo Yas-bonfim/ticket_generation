@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Conf 2025 Ticket Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Your Journey to Coding Conf 2025 Starts Here! 🎉</h1>
+        <p>Secure your spot at next year's biggest coding conference. Don't miss out on the fun!</p>
+
+        <form id="ticketForm" novalidate>
+            <div class="form-group">
+                <label for="avatar">🖼️ Upload Avatar</label>
+                <input type="file" id="avatar" accept="image/jpeg, image/png" required aria-describedby="avatarHint">
+                <small id="avatarHint">(JPG or PNG, max size: 500KB. Make it fun!)</small>
+                <span id="avatarError" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">👤 Full Name</label>
+                <input type="text" id="fullName" placeholder="e.g., Jonatan Kristof" required aria-describedby="nameHint">
+                <small id="nameHint">(Your name, but funnier!)</small>
+                <span id="nameError" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">📧 Email Address</label>
+                <input type="email" id="email" placeholder="example@email.com" required aria-describedby="emailHint">
+                <small id="emailHint">(We promise not to spam you... much!)</small>
+                <span id="emailError" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="github">🐱 GitHub Username</label>
+                <input type="text" id="github" placeholder="@yourusername" required aria-describedby="githubHint">
+                <small id="githubHint">(Show off your coding skills!)</small>
+                <span id="githubError" class="error-message" aria-live="polite"></span>
+            </div>
+
+            <button type="submit">🚀 Generate My Ticket</button>
+        </form>
+
+        <div id="ticketDisplay" class="ticket hidden">
+            <h2>🎟️ Congrats, <span id="ticketName"></span>! 🎟️</h2>
+            <p>Your ticket is ready. Get ready to code like a pro!</p>
+            <p>We've emailed your ticket to <span id="ticketEmail"></span>. Check your inbox (and spam folder, just in case)!</p>
+            <div class="ticket-info">
+                <h3>🌟 Coding Conf 2025 🌟</h3>
+                <p>📅 Jan 31, 2025 / 📍 Austin, TX</p>
+                <p>👤 <span id="ticketFullName"></span></p>
+                <p>🐱 <span id="ticketGithub"></span></p>
+            </div>
+            <div class="confetti"></div>
+            <!-- Símbolo do ticket -->
+            <div class="ticket-symbol"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
