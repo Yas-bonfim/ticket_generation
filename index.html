@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <label for="fullName">👤 Full Name</label>
-                <input type="text" id="fullName" placeholder="e.g., Jonatan Kristof" required aria-describedby="nameHint">
+                <input type="text" id="fullName" placeholder="e.g., Your Name" required aria-describedby="nameHint">
                 <small id="nameHint">(Your name, but funnier!)</small>
                 <span id="nameError" class="error-message" aria-live="polite"></span>
             </div>
@@ -49,6 +49,10 @@
             <p>Your ticket is ready. Get ready to code like a pro!</p>
             <p>We've emailed your ticket to <span id="ticketEmail"></span>. Check your inbox (and spam folder, just in case)!</p>
             <div class="ticket-info">
+                <!-- Local para exibir o avatar -->
+                <div class="avatar-container">
+                    <img id="ticketAvatar" src="" alt="User Avatar">
+                </div>
                 <h3>🌟 Coding Conf 2025 🌟</h3>
                 <p>📅 Jan 31, 2025 / 📍 Austin, TX</p>
                 <p>👤 <span id="ticketFullName"></span></p>

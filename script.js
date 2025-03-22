@@ -13,71 +13,100 @@ document.getElementById('ticketForm').addEventListener('submit', function(event)
     const githubError = document.getElementById('githubError');
 
     // Clear all error messages on re-submission
-    avatarError.textContent = '';
-    nameError.textContent = '';
-    emailError.textContent = '';
-    githubError.textContent = '';
+    clearErrors([avatarError, nameError, emailError, githubError]);
 
     // Validate Avatar
-    if (!avatar.files[0]) {
-        avatarError.textContent = 'Please upload an avatar.';
-        isValid = false;
-    } else if (avatar.files[0].size > 500 * 1024) {
-        avatarError.textContent = 'File size must be less than 500KB.';
-        isValid = false;
-    } else if (!['image/jpeg', 'image/png'].includes(avatar.files[0].type)) {
-        avatarError.textContent = 'File must be a JPG or PNG.';
-        isValid = false;
-    }
+    if (!validateAvatar(avatar, avatarError)) isValid = false;
 
     // Validate Full Name
-    if (!fullName.value.trim()) {
-        nameError.textContent = 'Please enter your full name.';
-        isValid = false;
-    }
+    if (!validateFullName(fullName, nameError)) isValid = false;
 
     // Validate Email
+    if (!validateEmail(email, emailError)) isValid = false;
+
+    // Validate GitHub Username
+    if (!validateGitHub(github, githubError)) isValid = false;
+
+    if (isValid) {
+        displayTicket(fullName.value, email.value, github.value, avatar.files[0]);
+        triggerConfetti();
+        resetForm();
+    }
+});
+
+// Função para limpar mensagens de erro
+function clearErrors(errorElements) {
+    errorElements.forEach(errorElement => errorElement.textContent = '');
+}
+
+// Função para validar o avatar
+function validateAvatar(avatar, avatarError) {
+    if (!avatar.files[0]) {
+        avatarError.textContent = 'Please upload an avatar.';
+        return false;
+    } else if (avatar.files[0].size > 500 * 1024) {
+        avatarError.textContent = 'File size must be less than 500KB.';
+        return false;
+    } else if (!['image/jpeg', 'image/png'].includes(avatar.files[0].type)) {
+        avatarError.textContent = 'File must be a JPG or PNG.';
+        return false;
+    }
+    return true;
+}
+
+// Função para validar o nome completo
+function validateFullName(fullName, nameError) {
+    if (!fullName.value.trim()) {
+        nameError.textContent = 'Please enter your full name.';
+        return false;
+    }
+    return true;
+}
+
+// Função para validar o email
+function validateEmail(email, emailError) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value)) {
         emailError.textContent = 'Please enter a valid email address.';
-        isValid = false;
+        return false;
     }
+    return true;
+}
 
-    // Validate GitHub Username
+// Função para validar o nome de usuário do GitHub
+function validateGitHub(github, githubError) {
     if (!github.value.trim()) {
         githubError.textContent = 'Please enter your GitHub username.';
-        isValid = false;
+        return false;
     }
+    return true;
+}
 
-    if (isValid) {
-        // Display ticket information
-        document.getElementById('ticketName').textContent = fullName.value;
-        document.getElementById('ticketEmail').textContent = email.value;
-        document.getElementById('ticketFullName').textContent = fullName.value;
-        document.getElementById('ticketGithub').textContent = github.value;
+// Função para exibir o ticket
+function displayTicket(fullName, email, github, avatarFile) {
+    document.getElementById('ticketName').textContent = fullName;
+    document.getElementById('ticketEmail').textContent = email;
+    document.getElementById('ticketFullName').textContent = fullName;
+    document.getElementById('ticketGithub').textContent = github;
 
-        // Display uploaded avatar
-        const avatarDisplay = document.createElement('img');
-        avatarDisplay.src = URL.createObjectURL(avatar.files[0]);
-        avatarDisplay.alt = 'User Avatar';
-        avatarDisplay.style.width = '100px';
-        avatarDisplay.style.height = '100px';
-        avatarDisplay.style.borderRadius = '50%';
+    // Exibir avatar
+    const ticketAvatar = document.getElementById('ticketAvatar');
+    ticketAvatar.src = URL.createObjectURL(avatarFile);
 
-        const ticketInfo = document.querySelector('.ticket-info');
-        ticketInfo.prepend(avatarDisplay);
+    // Mostrar o ticket
+    document.getElementById('ticketDisplay').classList.remove('hidden');
+}
 
-        // Show ticket display
-        document.getElementById('ticketDisplay').classList.remove('hidden');
+// Função para animação de confetti
+function triggerConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+}
 
-        // Trigger confetti animation
-        confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
-        });
-
-        // Reset form
-        document.getElementById('ticketForm').reset();
-    }
-});
+// Função para resetar o formulário
+function resetForm() {
+    document.getElementById('ticketForm').reset();
+}
