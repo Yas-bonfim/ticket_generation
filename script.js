@@ -12,19 +12,13 @@ document.getElementById('ticketForm').addEventListener('submit', function(event)
     const emailError = document.getElementById('emailError');
     const githubError = document.getElementById('githubError');
 
-    // Clear all error messages on re-submission
+    // Limpar mensagens de erro
     clearErrors([avatarError, nameError, emailError, githubError]);
 
-    // Validate Avatar
+    // Validações
     if (!validateAvatar(avatar, avatarError)) isValid = false;
-
-    // Validate Full Name
     if (!validateFullName(fullName, nameError)) isValid = false;
-
-    // Validate Email
     if (!validateEmail(email, emailError)) isValid = false;
-
-    // Validate GitHub Username
     if (!validateGitHub(github, githubError)) isValid = false;
 
     if (isValid) {
@@ -42,13 +36,13 @@ function clearErrors(errorElements) {
 // Função para validar o avatar
 function validateAvatar(avatar, avatarError) {
     if (!avatar.files[0]) {
-        avatarError.textContent = 'Please upload an avatar.';
+        avatarError.textContent = 'Por favor, envie uma imagem.';
         return false;
     } else if (avatar.files[0].size > 500 * 1024) {
-        avatarError.textContent = 'File size must be less than 500KB.';
+        avatarError.textContent = 'O arquivo deve ter menos de 500KB.';
         return false;
     } else if (!['image/jpeg', 'image/png'].includes(avatar.files[0].type)) {
-        avatarError.textContent = 'File must be a JPG or PNG.';
+        avatarError.textContent = 'A imagem deve ser JPG ou PNG.';
         return false;
     }
     return true;
@@ -57,7 +51,7 @@ function validateAvatar(avatar, avatarError) {
 // Função para validar o nome completo
 function validateFullName(fullName, nameError) {
     if (!fullName.value.trim()) {
-        nameError.textContent = 'Please enter your full name.';
+        nameError.textContent = 'Digite seu nome completo.';
         return false;
     }
     return true;
@@ -67,16 +61,16 @@ function validateFullName(fullName, nameError) {
 function validateEmail(email, emailError) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email.value)) {
-        emailError.textContent = 'Please enter a valid email address.';
+        emailError.textContent = 'Digite um email válido.';
         return false;
     }
     return true;
 }
 
-// Função para validar o nome de usuário do GitHub
+// Função para validar o GitHub
 function validateGitHub(github, githubError) {
     if (!github.value.trim()) {
-        githubError.textContent = 'Please enter your GitHub username.';
+        githubError.textContent = 'Digite seu usuário do GitHub.';
         return false;
     }
     return true;
@@ -89,19 +83,17 @@ function displayTicket(fullName, email, github, avatarFile) {
     document.getElementById('ticketFullName').textContent = fullName;
     document.getElementById('ticketGithub').textContent = github;
 
-    // Exibir avatar
     const ticketAvatar = document.getElementById('ticketAvatar');
     ticketAvatar.src = URL.createObjectURL(avatarFile);
 
-    // Mostrar o ticket
-    document.getElementById('ticketDisplay').classList.remove('hidden');
+    document.getElementById('ticketDisplay').style.display = 'block';
 }
 
 // Função para animação de confetti
 function triggerConfetti() {
     confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 120,
+        spread: 80,
         origin: { y: 0.6 }
     });
 }

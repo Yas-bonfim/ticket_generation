@@ -1,118 +1,138 @@
+/* Configuração Global */
 body {
-    font-family: 'Arial, sans-serif';
-    background-size: 400% 400%;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(120deg, #ff6ec4, #7873f5, #4facfe);
+    background-size: 200% 200%;
+    animation: gradientAnimation 8s infinite alternate;
     margin: 0;
     padding: 0;
-    text-align: center;
-    padding: 20px;
-    background: url('.\assets\background.jpg') no-repeat center center/cover;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-
- 
-
-    animation: bgAnimation 10s infinite ease-in-out;
 }
 
-@keyframes bgAnimation {
+/* Animação de fundo */
+@keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
-/* Container Principal */
-.container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+/* Box principal */
+.box-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     text-align: center;
+    color: #333;
     animation: fadeIn 1s ease-in-out;
 }
 
+/* Efeito Fade-in */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-/* Títulos e Textos */
+/* Título */
 h1 {
     font-family: 'Press Start 2P', cursive;
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #ff3366; /* Rosa neon */
-    text-shadow: 2px 2px 0 #33ccff; /* Azul neon */
+    font-size: 22px;
+    color: #ff3366;
+    text-shadow: 2px 2px 0 #33ccff;
+    margin-bottom: 10px;
 }
 
+/* Textos */
 p {
     font-size: 14px;
-    color: #666;
+    color: #555;
 }
 
 /* Formulário */
 .form-group {
     margin-bottom: 20px;
+    text-align: left;
 }
 
+/* Rótulos */
 label {
+    font-weight: bold;
+    color: #ff6ec4;
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
-    color: #33ccff; /* Azul neon */
 }
 
+/* Inputs */
 input {
     width: 100%;
     padding: 10px;
-    border: 2px solid #ff3366; /* Rosa neon */
-    border-radius: 10px;
+    border: 2px solid #bbb;
+    border-radius: 8px;
     background-color: #fff;
-    color: #333;
     font-size: 14px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:hover {
-    border-color: #33ccff; /* Azul neon */
-    box-shadow: 0 0 8px rgba(51, 204, 255, 0.5);
-}
-
-input:focus {
-    border-color: #33ccff; /* Azul neon */
+input:hover, input:focus {
+    border-color: #ff6ec4;
+    box-shadow: 0 0 8px rgba(255, 110, 196, 0.5);
     outline: none;
 }
 
+/* Estilizar erro nos inputs */
 input.error {
-    border-color: #ff4444; /* Vermelho para campos inválidos */
+    border-color: #ff4444;
+    background-color: rgba(255, 68, 68, 0.1);
 }
 
+/* Botão de envio */
 button {
     width: 100%;
     padding: 12px;
-    background-color: #ff3366; /* Rosa neon */
-    color: #fff;
+    background: linear-gradient(45deg, #ff3366, #ff6699);
+    color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s, transform 0.2s;
 }
 
 button:hover {
-    background-color: #33ccff; /* Azul neon */
+    background: linear-gradient(45deg, #33ccff, #66ffff);
     transform: scale(1.05);
 }
 
-/* Ticket Gerado */
+/* Ticket inicialmente oculto */
 .ticket {
-    position: relative;
-    margin-top: 20px;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Avatar do Ticket */
+#ticketAvatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 10px auto;
+    border: 3px solid #ff3366;
+    object-fit: cover;
+}
+
+/* Mensagens de erro */
+.error-message {
+    color: #ff4444;
+    font-size: 12px;
+    margin-top: 5px;
 }
