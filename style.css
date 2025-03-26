@@ -1,15 +1,20 @@
-/* Estilos Gerais */
 body {
-    font-family: 'Comic Neue', cursive;
-    background: linear-gradient(45deg, #ffcc00, #ff6699, #33ccff, #ffcc00);
+    font-family: 'Arial, sans-serif';
     background-size: 400% 400%;
     color: #333;
     margin: 0;
     padding: 0;
+    text-align: center;
+    padding: 20px;
+    background: url('.\assets\background.jpg') no-repeat center center/cover;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
+
+ 
+
     animation: bgAnimation 10s infinite ease-in-out;
 }
 
